@@ -1,0 +1,317 @@
+<html>
+<head><title>Jeu de Stan</title><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body onload="jeu();">
+<h1 align="center"style="color: blue; font-size:40px; font-weight :bold;font-style:Italic; font-family : Times New roman"> JEU DU SERPENT </h1>
+<h3 align="right"style="color:red; font-weight :bold;font-style:Italic; font-family : Times New roman"> <u> By Stan.co </u> </h3><br>
+<h4>Ceci est une version basique du célèbre "jeu du serpent" créée par STAN 😎. J'espère qu'elle vous plaira 😁.</h4><br>
+<h4>Score :<div id="score">0</div></h4>
+<h4>Temps :<div id="temps">120 secondes</div></h4>
+<canvas id="plan" style="border: 10px black solid;" width="320" height="300"></canvas><br><br>
+<script language="Javascript">
+
+document.addEventListener("keydown", keyDownHandlerLeft);
+document.addEventListener("keydown", keyDownHandlerRight);
+document.addEventListener("keydown", keyDownHandler);            
+
+function keyDownHandler(e) 
+  {
+    if(e.key == "Enter") 
+      {
+        document.removeEventListener("keydown", keyDownHandler);
+        debut();
+      }
+  }
+
+function keyDownHandlerRight(e) 
+{
+  if(e.key == "Right" || e.key == "ArrowRight") {
+    droite();
+  }
+}
+
+function keyDownHandlerLeft(e) 
+{
+  if(e.key == "Left" || e.key == "ArrowLeft") {
+  gauche();
+  }
+}
+
+function keyDownHandlerUp(e) 
+{
+  if(e.key == "Up" || e.key == "ArrowUp") {
+  haut();
+  }
+}
+
+function keyDownHandlerDown(e) 
+{
+  if(e.key == "Down" || e.key == "ArrowDown") {
+  bas();
+  }
+}
+
+avancer= null; gauches= null;
+haute= null; droites= null;
+base= null;
+function jeu() {
+plan= document.getElementById("plan");
+p= plan.getContext("2d"); 
+
+p.fillStyle = "green";
+p.fillRect(100, 200, 20, 20);
+p.fillRect(100, 220, 20, 20);
+
+var ta= Math.round(12*(Math.random()));
+x= 20*ta; y= x+20;
+if (ta > 2) {
+if (x != 100) {
+if (y != 200) {
+if (x != 120) {
+if (x != 80) {
+if (y != 220) {
+if (y != 180) { bonbons (); }
+else { bonbonss(); }}
+else { bonbonss(); }}
+else { bonbonss(); }}
+else { bonbonss(); }}
+else { bonbonss(); }}
+else { bonbonss(); }}
+else { bonbonss(); }
+}//cette fonction montre la page
+
+function bonbonsss() {
+var t= Math.random();
+var ta= 12*t;
+var x= 20*(Math.round(ta)); var y= x+20;
+if (ta > 2) {
+if (x != 100) {
+if (y != 200) {
+if (x != 120) {
+if (x != 80) {
+if (y != 220) {
+if (y != 180) { bonbons (); }
+else { bonbonss(); }}
+else { bonbonss(); }}
+else { bonbonss(); }}
+else { bonbonss(); }}
+else { bonbonss(); }}
+else { bonbonss(); }}
+else { bonbonss(); }
+}
+function bonbonss() {
+var t= Math.random();
+var ta= 12*t;
+var x= 20*(Math.round(ta)); var y= x+20;
+if (ta > 2) {
+if (x != 100) {
+if (y != 200) {
+if (x != 120) {
+if (x != 80) {
+if (y != 220) {
+if (y != 180) { bonbons (); }
+else { bonbonsss(); }}
+else { bonbonsss(); }}
+else { bonbonsss(); }}
+else { bonbonsss(); }}
+else { bonbonsss(); }}
+else { bonbonsss(); }}
+else { bonbonsss(); }
+}
+function bonbons() {
+p.fillStyle = "red";
+p.fillRect(x, y, 20, 20);
+p.fillStyle = "green";
+}
+
+function fin() {
+  clearInterval(avancer);
+  clearInterval(gauches);
+  clearInterval(droites);
+  clearInterval(base);
+  clearInterval(haute);
+  clearInterval(temps);
+alert ("PERDU ! Vous vous êtes cogné.");
+var score= (document.getElementById("score"). innerHTML);
+document.write("<p><h1 style='color:red'> 😔 Dommage ! Tu y étais presque, ton score est "+score+"</h1></p>");	
+document.write('<p><h1 style="color:blue">ACTUALISEZ LA PAGE POUR RECOMMENCER</h1></p>');	
+}
+
+function debut () {
+compte();
+var tab= [(p.fillRect(100, 200, 20, 20)),p.fillRect(100, 220, 20, 20)];
+dxt= 100; dyt= 200;
+var b= document.getElementsByTagName("button");
+avancer= setInterval(hauts, 300);
+
+var btn = document.querySelector('input');
+if (btn.value === 'Commencer !!') {
+btn.disabled = true;
+}}//Cette fonction introduit l'avancée
+
+function fini() {
+  clearInterval(temps);
+  clearInterval(avancer);
+  clearInterval(gauches);
+  clearInterval(droites);
+  clearInterval(base);
+  clearInterval(haute);
+  alert("Fin du jeu, temps écoulé");
+  var score= (document.getElementById("score"). innerHTML);
+  document.write("<p><h1 style='color:green'> 🎉 Bravo ! Tu as tenu jusqu'au bout, ton score est "+score+"</h1></p>");	
+  document.write('<p><h1 style="color:blue">ACTUALISEZ LA PAGE POUR RECOMMENCER</h1></p>');	
+  }
+function decompte() {
+i--;
+if(i == 0) { fini(); }
+else {	
+document.getElementById("temps").innerHTML = (i + " secondes restantes");
+}}
+function compte(){
+i = 120;
+temps = null;
+temps = setInterval(decompte, 1000);
+}	
+
+function hauts() {
+clearInterval(base);
+dyt-=20;
+var e= p.fillRect(dxt, dyt, 20, 20);
+var b= p.fillRect(dxt, (dyt+20), 20, 20);
+var c= p.clearRect(dxt, (dyt+40), 20, 20);
+if (dxt==x && dyt==y) { gagne(); }
+if (dxt!=x || dyt!=y) { bonbons (); }
+if (dyt < 0) { fin(); }
+}//Cette fonction commence l'avancée
+
+function gauchess() {
+dxt-=20;
+var b= p.fillRect(dxt,dyt,20,20);
+var c= p.clearRect((dxt+40),dyt,20,20);
+if (dxt==x && dyt==y) { gagne(); }
+if (dxt!=x || dyt!=y) { bonbons (); }
+if (dxt < 0) { fin(); }
+}
+function gauche() {
+clearInterval(base);
+clearInterval(droites);
+clearInterval(avancer);
+clearInterval(haute);
+document.addEventListener("keydown", keyDownHandlerUp);
+document.addEventListener("keydown", keyDownHandlerDown);
+document.removeEventListener("keydown", keyDownHandlerLeft);            
+document.removeEventListener("keydown", keyDownHandlerRight);            
+var a= p.clearRect(dxt, (dyt+20), 20, 20);
+var d= p.clearRect(dxt, (dyt-20), 20, 20);
+gauches= setInterval(gauchess, 300);
+}//Cette fonction va à gauche
+
+function droitess(){
+dxt+=20;
+var b= p.fillRect(dxt,dyt,20,20);
+var c= p.clearRect((dxt-40),dyt,20,20);
+if (dxt==x && dyt==y) { gagne(); }
+if (dxt!=x || dyt!=y) { bonbons (); }
+if (dxt > 300) { fin(); }
+}
+function droite() {
+clearInterval(base);
+clearInterval(gauches);
+clearInterval(avancer);
+clearInterval(haute);
+document.addEventListener("keydown", keyDownHandlerUp);
+document.addEventListener("keydown", keyDownHandlerDown);
+document.removeEventListener("keydown", keyDownHandlerLeft);            
+document.removeEventListener("keydown", keyDownHandlerRight);            
+var a= p.clearRect(dxt, (dyt+20), 20, 20);
+var d= p.clearRect(dxt, (dyt-20), 20, 20);
+droites= setInterval(droitess,300);
+}//Cette fonction va à droite
+
+function basess(){
+dyt+=20;
+var b= p.fillRect(dxt, dyt, 20, 20);
+var c= p.clearRect(dxt, (dyt-40), 20, 20);
+if (dxt==x && dyt==y) { gagne(); }
+if (dxt!=x || dyt!=y) { bonbons (); }
+if (dyt > 280) { fin(); }
+}
+function bas() {
+clearInterval(droites);
+clearInterval(gauches);
+clearInterval(avancer);
+clearInterval(haute);
+document.addEventListener("keydown", keyDownHandlerLeft);
+document.addEventListener("keydown", keyDownHandlerRight);
+document.removeEventListener("keydown", keyDownHandlerUp);            
+document.removeEventListener("keydown", keyDownHandlerDown);            
+var a= p.clearRect((dxt+20), dyt, 20, 20);
+var d= p.clearRect((dxt-20), dyt, 20, 20);
+base= setInterval(basess,300);
+}//Cette fonction descend
+
+function hautess(){
+dyt-=20;
+var b= p.fillRect(dxt, dyt, 20, 20);
+var c= p.clearRect(dxt, (dyt+40), 20, 20);
+if (dxt==x && dyt==y) { gagne(); }
+if (dxt!=x || dyt!=y) { bonbons (); }
+if (dyt < 0) { fin(); }
+}
+function haut() {
+clearInterval(droites);
+clearInterval(gauches);
+clearInterval(avancer);
+clearInterval(base);
+document.addEventListener("keydown", keyDownHandlerLeft);
+document.addEventListener("keydown", keyDownHandlerRight);
+document.removeEventListener("keydown", keyDownHandlerUp);            
+document.removeEventListener("keydown", keyDownHandlerDown);            
+var a= p.clearRect((dxt+20), dyt, 20, 20);
+var d= p.clearRect((dxt-20), dyt, 20, 20);
+haute= setInterval(hautess,300);
+}//Cette fonction monte
+
+function gagne() {
+t= Math.random();
+ta= 12*t;
+x= 20*(Math.round(ta)); y= x+20;
+bonbon ();
+}
+j=0;
+function bonbon() {
+if (ta > 2) { a(); }
+else { gagne(); }
+}
+function a() {
+if (x != dxt) { b(); }
+else { gagne(); }
+}
+function b() {
+if (y != dyt) { c(); } 
+else { gagne(); }
+}
+function c() {
+if (x != (dxt+20)) { d(); }
+else { gagne(); }
+}
+function d() {
+if (x != (dxt-20)) { e(); }
+else { gagne(); }
+}
+function e() {
+if (y != (dyt+20)) { f(); }
+else { gagne(); }
+}
+function f() {
+if (y != (dyt-20)) { 
+j+=1;
+document.getElementById("score"). innerHTML= j;
+bonbons ();
+}
+else { gagne();}
+}
+</script>
+</body>
+</html>
